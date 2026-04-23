@@ -4,6 +4,8 @@ A Chrome browser extension that analyzes social media posts in real time to dete
 fake news, misleading content, and AI-generated imagery. Built as a capstone project 
 for the University of North Texas College of Visual Arts & Design.
 
+If you want to read the whole case study, you caan view it at [natashasturdevant.com/proof](https://natashasturdevant.com/proof)
+
 ---
 
 ## ⚠️ Requirements
