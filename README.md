@@ -27,6 +27,9 @@ side panel. Click "Scan" to analyze the content. Within seconds, it returns:
 **Current accuracy: ~66%** — this is an early-stage prototype. Results should be 
 used as a starting point for your own judgment, not a definitive verdict.
 
+<img width="1498" height="975" alt="Screenshot 2026-04-02 at 9 36 57 AM" src="https://github.com/user-attachments/assets/ecf86227-4e3e-49be-bd02-42e27a422070" />
+<img width="1499" height="992" alt="Screenshot 2026-04-02 at 10 11 16 AM" src="https://github.com/user-attachments/assets/5b75d130-5c2a-4e07-b5d6-4e96b0bf96b9" />
+
 ---
 
 ## Setup
