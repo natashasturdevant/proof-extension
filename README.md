@@ -18,8 +18,8 @@ API usage is billed to your account — casual use is typically very low cost.
 
 ## How It Works
 
-When you open a post on Facebook or Instagram, Proof. automatically appears as a 
-side panel. Click "Scan" to analyze the content. Within seconds, it returns:
+When you open a post on Instagram, Proof. automatically appears as a small purple icon on the bottom right-hand corner: click it to open the
+side panel, and enter your **API key** (See ⚠️ Requirements). Open or scroll to a photo-only post, and "Scan" to analyze the content. Within seconds, it returns:
 
 - A credibility score (Factual / Misleading / Fake)
 - Verified sources supporting or contradicting the post
