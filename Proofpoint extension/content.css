@@ -1,0 +1,15 @@
+/* Proofpoint - Content CSS */
+/* Additional styles that complement the injected inline styles */
+/* Most styles are injected directly in content.js via a <style> tag */
+
+/* Ensure sidebar doesn't get clipped by Facebook's overflow rules */
+body {
+  overflow-x: visible !important;
+}
+
+/* Facebook sometimes sets overflow:hidden on body - override for sidebar */
+#pp-sidebar,
+#pp-toggle {
+  position: fixed !important;
+  z-index: 999999 !important;
+}

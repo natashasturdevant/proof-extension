@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proof</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 300px;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      color: #111827;
+      padding: 0;
+    }
+
+    /* ─── Header ─── */
+    .pp-header {
+      background: linear-gradient(135deg, #8c52ff 0%, #a855f7 100%);
+      padding: 20px 20px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pp-logo {
+      flex-shrink: 0;
+    }
+
+    .pp-brand {
+      flex: 1;
+    }
+
+    .pp-brand-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+
+    .pp-brand-tagline {
+      font-size: 11px;
+      color: rgba(255,255,255,0.75);
+      margin-top: 3px;
+      font-weight: 400;
+    }
+
+    /* ─── Status Badge ─── */
+    .pp-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: #f9fafb;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .pp-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .pp-status-dot.active {
+      background: #22c55e;
+      box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+    }
+
+    .pp-status-dot.inactive {
+      background: #9ca3af;
+    }
+
+    .pp-status-text {
+      font-size: 12px;
+      color: #6b7280;
+      font-weight: 500;
+    }
+
+    /* ─── Body ─── */
+    .pp-body {
+      padding: 18px 20px 20px;
+    }
+
+    .pp-section-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+
+    .pp-input-wrap {
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .pp-key-input {
+      width: 100%;
+      padding: 10px 12px 10px 38px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #374151;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      background: #ffffff;
+    }
+
+    .pp-key-input:focus {
+      border-color: #8c52ff;
+      box-shadow: 0 0 0 3px rgba(140, 82, 255, 0.12);
+    }
+
+    .pp-key-input::placeholder {
+      color: #d1d5db;
+    }
+
+    .pp-input-icon {
+      position: absolute;
+      left: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
+      pointer-events: none;
+    }
+
+    .pp-save-btn {
+      width: 100%;
+      padding: 11px;
+      background: #8c52ff;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+      letter-spacing: 0.2px;
+      box-shadow: 0 2px 8px rgba(140, 82, 255, 0.25);
+      margin-bottom: 12px;
+    }
+
+    .pp-save-btn:hover {
+      background: #7c3aed;
+      box-shadow: 0 4px 14px rgba(140, 82, 255, 0.4);
+    }
+
+    .pp-save-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* ─── Status messages ─── */
+    .pp-feedback {
+      font-size: 12px;
+      text-align: center;
+      padding: 6px 10px;
+      border-radius: 6px;
+      display: none;
+      margin-bottom: 10px;
+    }
+
+    .pp-feedback.success {
+      background: #D1FAE5;
+      color: #065F46;
+      display: block;
+    }
+
+    .pp-feedback.error {
+      background: #FEE2E2;
+      color: #991B1B;
+      display: block;
+    }
+
+    /* ─── Key display ─── */
+    .pp-current-key {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      background: #F3EEFF;
+      border-radius: 7px;
+      margin-bottom: 10px;
+    }
+
+    .pp-current-key.visible {
+      display: flex;
+    }
+
+    .pp-key-mask {
+      font-size: 12px;
+      color: #6D28D9;
+      font-weight: 500;
+      font-family: monospace;
+    }
+
+    .pp-key-remove {
+      background: none;
+      border: none;
+      color: #9ca3af;
+      cursor: pointer;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .pp-key-remove:hover {
+      background: #FEE2E2;
+      color: #DC2626;
+    }
+
+    /* ─── Divider ─── */
+    .pp-divider {
+      height: 1px;
+      background: #f3f4f6;
+      margin: 14px 0;
+    }
+
+    /* ─── Info section ─── */
+    .pp-info {
+      font-size: 11.5px;
+      color: #9ca3af;
+      line-height: 1.55;
+    }
+
+    .pp-info a {
+      color: #8c52ff;
+      text-decoration: none;
+    }
+
+    .pp-info a:hover {
+      text-decoration: underline;
+    }
+
+    /* ─── How to use ─── */
+    .pp-how-to {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pp-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+      color: #4b5563;
+      line-height: 1.4;
+    }
+
+    .pp-step-num {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #F3EEFF;
+      color: #8c52ff;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="pp-header">
+    <div class="pp-logo">
+      <svg width="38" height="38" viewBox="270 130 490 490" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Ghost body outline -->
+        <path d="M644.86,410.55c10.67,0,20.69,2.92,29.42,8.02.7.41,1.61.1,1.89-.66,7.58-20.69,11.8-43.01,11.95-66.3.71-109.29-90.01-199.31-199.29-197.78-107.24,1.49-193.71,88.89-193.71,196.48,0,24.04,4.32,47.08,12.22,68.37,9.08,24.48-29.67,91.41-12.22,110.17,17.45,18.76,91.09-10.65,114.67.16,24.91,11.43,52.63,17.8,81.84,17.8,38.38,0,74.19-11.01,104.44-30.03.64-.4.79-1.26.35-1.87-7.94-10.94-12.66-24.64-12.66-39.51,0-35.82,27.36-64.85,61.11-64.85Z"
+              fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="36" stroke-miterlimit="10"/>
+        <!-- Speech bubble C-curve -->
+        <path d="M584.14,466.28c-2.21,11.43-1.14,23.45,3.8,34.69,13.57,30.9,51.16,44.28,83.95,29.88,13.18-5.79,23.57-15.18,30.41-26.35"
+              fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="36" stroke-linecap="round" stroke-miterlimit="10"/>
+        <!-- Right eye -->
+        <path d="M594.85,422.34h0c-6.06,0-11.66-2.05-16.15-5.5-6.34-4.87-10.44-12.53-10.44-21.09v-36.36c0-14.63,11.97-26.59,26.59-26.59h0c14.63,0,26.59,11.97,26.59,26.59v36.36c0,14.63-11.97,26.59-26.59,26.59Z"
+              fill="rgba(255,255,255,0.95)"/>
+        <!-- Left eye -->
+        <rect x="455.28" y="337.66" width="53.18" height="89.54" rx="21.16" ry="21.16" fill="rgba(255,255,255,0.95)"/>
+        <!-- Trailing dot -->
+        <circle cx="713.92" cy="454.01" r="19.54" fill="rgba(255,255,255,0.95)"/>
+      </svg>
+    </div>
+    <div class="pp-brand">
+      <div class="pp-brand-name">Proof</div>
+      <div class="pp-brand-tagline">AI-powered fact checking</div>
+    </div>
+  </div>
+
+  <!-- Status indicator -->
+  <div class="pp-status">
+    <div class="pp-status-dot" id="status-dot"></div>
+    <div class="pp-status-text" id="status-text">Checking status...</div>
+  </div>
+
+  <!-- Body -->
+  <div class="pp-body">
+
+    <!-- Current key display -->
+    <div class="pp-current-key" id="current-key-display">
+      <span class="pp-key-mask" id="key-mask"></span>
+      <button class="pp-key-remove" id="remove-key-btn">Remove</button>
+    </div>
+
+    <!-- Feedback -->
+    <div class="pp-feedback" id="feedback"></div>
+
+    <!-- API Key section -->
+    <div class="pp-section-title">Anthropic API Key <span style="font-size:10px;color:#8c52ff;font-weight:600;text-transform:none;letter-spacing:0;">· Claude Opus 4.6</span></div>
+    <div class="pp-input-wrap">
+      <svg class="pp-input-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <rect x="3" y="7" width="10" height="7" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M5.5 7V5a2.5 2.5 0 015 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <input
+        class="pp-key-input"
+        id="api-key-input"
+        type="password"
+        placeholder="sk-ant-api03-..."
+        autocomplete="off"
+        spellcheck="false"
+      />
+    </div>
+    <button class="pp-save-btn" id="save-btn">Save API Key</button>
+
+    <div class="pp-divider"></div>
+
+    <!-- How to use -->
+    <div class="pp-section-title" style="margin-bottom:10px;">How to use</div>
+    <div class="pp-how-to">
+      <div class="pp-step">
+        <div class="pp-step-num">1</div>
+        <span>Navigate to <strong>facebook.com</strong> or <strong>instagram.com</strong> and scroll to a post</span>
+      </div>
+      <div class="pp-step">
+        <div class="pp-step-num">2</div>
+        <span>Click the <strong>purple ghost button</strong> in the bottom-right corner</span>
+      </div>
+      <div class="pp-step">
+        <div class="pp-step-num">3</div>
+        <span>Press <strong>"Scan Post"</strong> to fact-check the most visible post</span>
+      </div>
+    </div>
+
+    <div class="pp-divider"></div>
+
+    <div class="pp-info">
+      Powered by <strong>Claude Opus 4.6</strong> (Anthropic). Your API key is stored locally and never shared. Get a key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>.
+    </div>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
